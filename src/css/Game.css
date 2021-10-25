@@ -1,0 +1,17 @@
+.canvas {
+  user-select: none;
+  position: relative;
+
+  height: 600px;
+  width: 1200px;
+  border: 2px solid black;
+  background-color: black;
+}
+
+@media only screen and (max-width: 1200px) {
+  .canvas {
+    user-select: none;
+    width: 80%;
+    height: 73%;
+  }
+}
