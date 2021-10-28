@@ -1,0 +1,72 @@
+import { Player, Brick } from "./interfaces";
+import { pxForDontShowBlackInBottom,BLOCK } from "../resouces";
+const intersects = require("intersects");
+
+export function intersect(
+    coordMario: Player,
+    BLOCK: number,
+    obj: Brick,
+    direction: string,
+
+  ) {
+    switch (direction) {
+      case "left":
+        return intersects.boxBox(
+          Math.abs(coordMario.x) + BLOCK * 9 + 2,
+          coordMario.y,
+          BLOCK,
+          BLOCK,
+          obj.x * BLOCK,
+          obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
+          BLOCK,
+          BLOCK
+        );
+  
+      case "right":
+        return intersects.boxBox(
+          Math.abs(coordMario.x) + BLOCK * 9 - 2,
+          coordMario.y,
+          BLOCK,
+          BLOCK,
+          obj.x * BLOCK,
+          obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
+          BLOCK,
+          BLOCK
+        );
+  
+      case "down":
+        return intersects.boxBox(
+          Math.abs(coordMario.x) + BLOCK * 9,
+          coordMario.y + 3,
+          BLOCK,
+          BLOCK,
+          obj.x * BLOCK,
+          obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
+          BLOCK,
+          BLOCK
+        );
+  
+      case "up":
+        return intersects.boxBox(
+          Math.abs(coordMario.x) + BLOCK * 9,
+          coordMario.y - 2,
+          BLOCK,
+          BLOCK,
+          obj.x * BLOCK,
+          obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
+          BLOCK,
+          BLOCK
+        );
+    }
+  }
+  
+  export function checkCollision(
+    coordMario: Player,
+    array: Array<Brick>,
+    direction: string
+  ) {
+    return array.some((element) =>
+      intersect(coordMario, BLOCK,element, direction)
+    );
+  }
+  

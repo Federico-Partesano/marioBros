@@ -1,17 +1,30 @@
-const intersects = require("intersects");
-export interface Player {
-  x: number;
-  y: number;
-  vel: number;
+import { Brick } from "./components/interfaces";
+import imgMap from "../images/map.png";
+import imgWall from "../images/wall.png";
+import imgSprites from "../images/sprites.gif";
+
+export let currentTime = 0;
+export let imageMap = new Image();
+imageMap.src = imgMap;
+export const BLOCK = 16;
+export const pxForDontShowBlackInBottom = 8;
+export const speedMario = 2;
+export const speedAnimationTimeInMillies = 200;
+export const fps = 0;
+export const gravity: number = 0.05;
+export let imageWall = new Image();
+imageWall.src = imgWall;
+
+export let sprites = new Image();
+sprites.src = imgSprites;
+
+export enum directionsMario {
+  right = "right",
+  left = "left",
+  down = "down",
+  up = "up",
+  none = "done",
 }
-export type Brick = {
-  x: number;
-  y: number;
-};
-export type Jump = {
-  state: boolean;
-  count: number;
-};
 
 export const spritesMario = {
   stop: { left: { x: 222, y: 44 }, right: { x: 274, y: 44 } },
@@ -35,6 +48,8 @@ export const spritesMario = {
     { x: 124, y: 44 },
   ],
 };
+
+
 
 export const floor: Array<Brick> = [];
 
@@ -179,130 +194,4 @@ export const obstacleFloor: Array<Brick> = [
   { x: 152, y: 3 },
 ];
 
-export function checkCollisionObstacledirectionRight(
-  coordMario: Player,
-  BLOCK: number,
-  pxForDontShowBlackInBottom: number
-) {
-  return obstacleFloor.some(
-    (brick) =>
-      Math.abs(coordMario.x) + BLOCK + BLOCK * 9 + 1 >= brick.x * BLOCK &&
-      Math.abs(coordMario.x) + BLOCK + BLOCK * 9 + 1 <=
-        brick.x * BLOCK + BLOCK &&
-      coordMario.y >= brick.y * BLOCK - pxForDontShowBlackInBottom &&
-      coordMario.y <= brick.y * BLOCK + BLOCK - pxForDontShowBlackInBottom &&
-      coordMario.y + BLOCK >= brick.y * BLOCK - pxForDontShowBlackInBottom &&
-      coordMario.y + BLOCK <=
-        brick.y * BLOCK + BLOCK - pxForDontShowBlackInBottom
-  );
-}
-export function checkCollisionObstacledirectionLeft(
-  coordMario: Player,
-  BLOCK: number,
-  pxForDontShowBlackInBottom: number
-) {
-  return obstacleFloor.some(
-    (brick) =>
-      Math.abs(coordMario.x) + BLOCK * 9 - 1 >= brick.x * BLOCK &&
-      Math.abs(coordMario.x) + BLOCK * 9 - 1 <= brick.x * BLOCK + BLOCK &&
-      Math.abs(coordMario.y) >= brick.y * BLOCK - pxForDontShowBlackInBottom &&
-      Math.abs(coordMario.y) <=
-        brick.y * BLOCK + BLOCK - pxForDontShowBlackInBottom
-  );
-}
 
-export function checkCollisionObstacleFloordirectionDown(
-  coordMario: Player,
-  BLOCK: number,
-  pxForDontShowBlackInBottom: number
-) {
-  return floor.some(
-    (brick) =>
-      coordMario.y + BLOCK + 1 > brick.y * BLOCK + pxForDontShowBlackInBottom &&
-      coordMario.y + BLOCK + 1 <
-        brick.y * BLOCK + BLOCK + pxForDontShowBlackInBottom
-  );
-}
-
-export function checkCollisionFloordirectionDown(
-  coordMario: Player,
-  BLOCK: number,
-  pxForDontShowBlackInBottom: number
-) {
-  return obstacleFloor.some(
-    (brick) =>
-      coordMario.y + BLOCK >= brick.y * BLOCK - pxForDontShowBlackInBottom &&
-      coordMario.y + BLOCK <=
-        brick.y * BLOCK + BLOCK - pxForDontShowBlackInBottom
-  );
-}
-
-export function intersect(
-  coordMario: Player,
-  BLOCK: number,
-  obj: Brick,
-  direction: string,
-  pxForDontShowBlackInBottom: number
-) {
-  switch (direction) {
-    case "left":
-      return intersects.boxBox(
-        Math.abs(coordMario.x) + BLOCK * 9 + 2,
-        coordMario.y,
-        BLOCK,
-        BLOCK,
-        obj.x * BLOCK,
-        obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
-        BLOCK,
-        BLOCK
-      );
-
-    case "right":
-      return intersects.boxBox(
-        Math.abs(coordMario.x) + BLOCK * 9 - 2,
-        coordMario.y,
-        BLOCK,
-        BLOCK,
-        obj.x * BLOCK,
-        obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
-        BLOCK,
-        BLOCK
-      );
-
-    case "down":
-      return intersects.boxBox(
-        Math.abs(coordMario.x) + BLOCK * 9,
-        coordMario.y + 3,
-        BLOCK,
-        BLOCK,
-        obj.x * BLOCK,
-        obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
-        BLOCK,
-        BLOCK
-      );
-
-    case "up":
-      return intersects.boxBox(
-        Math.abs(coordMario.x) + BLOCK * 9,
-        coordMario.y - 2,
-        BLOCK,
-        BLOCK,
-        obj.x * BLOCK,
-        obj.y * BLOCK + pxForDontShowBlackInBottom - coordMario.y + 102,
-        BLOCK,
-        BLOCK
-      );
-  }
-}
-
-export function checkCollision(
-  coordMario: Player,
-  BLOCK: number,
-  array: Array<Brick>,
-  pxForDontShowBlackInBottom: number,
-  direction: string
-) {
-  return array.some((element) =>
-    intersect(coordMario, BLOCK, element, direction, pxForDontShowBlackInBottom)
-  );
-}
