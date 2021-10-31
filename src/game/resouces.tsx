@@ -1,19 +1,29 @@
-import { Brick } from "./components/interfaces";
-import imgMap from "../images/map.png";
-import imgWall from "../images/wall.png";
+import { Brick, TypeObstacle, ObstacleBrick, Enemy } from "./components/interfaces";
+import imgMap from "../images/map2.png";
+import imgWall from "../images/skyBrick.png";
 import imgSprites from "../images/sprites.gif";
+import imgEmptyBrick from "../images/emptyBrick.png";
+import specialBrick from "../images/specialBrick.png";
 
-export let currentTime = 0;
+
 export let imageMap = new Image();
 imageMap.src = imgMap;
+export let imageWall = new Image();
+imageWall.src = imgWall;
+export let imageEmptyBrick = new Image();
+imageEmptyBrick.src = imgEmptyBrick;
+export let imageSepcialBrick = new Image();
+imageSepcialBrick.src = specialBrick;
+
+
 export const BLOCK = 16;
 export const pxForDontShowBlackInBottom = 8;
 export const speedMario = 2;
 export const speedAnimationTimeInMillies = 200;
+export const speedAnimationTimeInMilliesMushrooms = 200;
 export const fps = 0;
 export const gravity: number = 0.05;
-export let imageWall = new Image();
-imageWall.src = imgWall;
+export const speedMushRooms: number = 0.05;
 
 export let sprites = new Image();
 sprites.src = imgSprites;
@@ -25,6 +35,22 @@ export enum directionsMario {
   up = "up",
   none = "done",
 }
+
+export const spritesEnemyMushRoom = [
+ {x:296, y: 186},
+  {x: 315, y: 186}
+];
+
+export let enemyMushRoom: Array<Enemy> = [
+{x: 15, y: 5}
+];
+
+export const setEnemyMushRooms = (value: any) => {
+  enemyMushRoom = value;
+  }
+  export const setEnemyMushRoom = (index: number, object: any) => {
+    enemyMushRoom[index] = object;
+    }
 
 export const spritesMario = {
   stop: { left: { x: 222, y: 44 }, right: { x: 274, y: 44 } },
@@ -70,128 +96,128 @@ for (let index = 155; index <= 180; index++) {
   floor.push({ x: index, y: 8 });
 }
 
-export const obstacleFloor: Array<Brick> = [
+export let obstacleFloor: Array<ObstacleBrick> = [
   // brick in the sky
 
-  { x: 16, y: 3 },
-  { x: 20, y: 3 },
-  { x: 21, y: 3 },
-  { x: 22, y: 3 },
-  { x: 23, y: 3 },
-  { x: 24, y: 3 },
+  { x: 16, y: 3 , type: "specialBrick"},
+  { x: 20, y: 3 , type: "brick"},
+  { x: 21, y: 3 , type: "specialBrick"},
+  { x: 22, y: 3 , type: "brick"},
+  { x: 23, y: 3 , type: "specialBrick"},
+  { x: 24, y: 3 , type: "brick"},
 
-  { x: 22, y: -1 },
+  { x: 22, y: -1,type: "specialBrick" },
   // second block in the sky
-  { x: 77, y: 3 },
-  { x: 78, y: 3 },
-  { x: 79, y: 3 },
+  { x: 77, y: 3, type: "brick" },
+  { x: 78, y: 3, type: "specialBrick" },
+  { x: 79, y: 3, type: "brick" },
 
-  { x: 80, y: -1 },
-  { x: 81, y: -1 },
-  { x: 82, y: -1 },
-  { x: 83, y: -1 },
-  { x: 84, y: -1 },
-  { x: 85, y: -1 },
-  { x: 86, y: -1 },
-  { x: 87, y: -1 },
+  { x: 80, y: -1, type: "brick" },
+  { x: 81, y: -1, type: "brick" },
+  { x: 82, y: -1, type: "brick" },
+  { x: 83, y: -1, type: "brick" },
+  { x: 84, y: -1, type: "brick" },
+  { x: 85, y: -1, type: "brick" },
+  { x: 86, y: -1, type: "brick" },
+  { x: 87, y: -1, type: "brick" },
 
-  { x: 91, y: -1 },
-  { x: 92, y: -1 },
-  { x: 93, y: -1 },
-  { x: 94, y: -1 },
+  { x: 91, y: -1, type: "brick" },
+  { x: 92, y: -1, type: "brick" },
+  { x: 93, y: -1, type: "brick" },
+  { x: 94, y: -1, type: "specialBrick" },
 
-  { x: 94, y: 3 },
+  { x: 94, y: 3, type: "brick" },
 
-  { x: 100, y: 3 },
+  { x: 100, y: 3, type: "brick" },
 
-  { x: 106, y: 3 },
+  { x: 106, y: 3, type: "specialBrick" },
 
-  { x: 109, y: 3 },
+  { x: 109, y: 3, type: "specialBrick" },
 
-  { x: 109, y: -1 },
+  { x: 109, y: -1, type: "specialBrick" },
 
-  { x: 112, y: 3 },
+  { x: 112, y: 3, type: "specialBrick" },
 
-  { x: 118, y: 3 },
+  { x: 118, y: 3, type: "brick" },
 
-  { x: 121, y: -1 },
-  { x: 122, y: -1 },
-  { x: 123, y: -1 },
+  { x: 121, y: -1, type: "brick" },
+  { x: 122, y: -1, type: "brick" },
+  { x: 123, y: -1, type: "brick" },
 
-  { x: 128, y: -1 },
-  { x: 129, y: -1 },
-  { x: 130, y: -1 },
-  { x: 131, y: -1 },
+  { x: 128, y: -1, type: "brick" },
+  { x: 129, y: -1, type: "specialBrick" },
+  { x: 130, y: -1, type: "specialBrick" },
+  { x: 131, y: -1, type: "brick" },
 
-  { x: 129, y: 3 },
-  { x: 130, y: 3 },
+  { x: 129, y: 3, type: "brick" },
+  { x: 130, y: 3, type: "brick" },
   // first obstacle
-  { x: 28, y: 6 },
-  { x: 28, y: 5 },
-  { x: 29, y: 5 },
-  { x: 29, y: 6 },
+  { x: 28, y: 6, type: "obstacleFloor" },
+  { x: 28, y: 5, type: "obstacleFloor" },
+  { x: 29, y: 5, type: "obstacleFloor" },
+  { x: 29, y: 6, type: "obstacleFloor" },
   //second
-  { x: 38, y: 6 },
-  { x: 38, y: 5 },
-  { x: 38, y: 4 },
-  { x: 39, y: 6 },
-  { x: 39, y: 5 },
-  { x: 39, y: 4 },
+  { x: 38, y: 6, type: "obstacleFloor" },
+  { x: 38, y: 5, type: "obstacleFloor" },
+  { x: 38, y: 4, type: "obstacleFloor" },
+  { x: 39, y: 6, type: "obstacleFloor" },
+  { x: 39, y: 5, type: "obstacleFloor" },
+  { x: 39, y: 4, type: "obstacleFloor" },
   //third
-  { x: 46, y: 6 },
-  { x: 46, y: 5 },
-  { x: 46, y: 4 },
-  { x: 46, y: 3 },
-  { x: 47, y: 6 },
-  { x: 47, y: 5 },
-  { x: 47, y: 4 },
-  { x: 47, y: 3 },
+  { x: 46, y: 6, type: "obstacleFloor" },
+  { x: 46, y: 5, type: "obstacleFloor"},
+  { x: 46, y: 4, type: "obstacleFloor"},
+  { x: 46, y: 3, type: "obstacleFloor"},
+  { x: 47, y: 6, type: "obstacleFloor" },
+  { x: 47, y: 5, type: "obstacleFloor"},
+  { x: 47, y: 4, type: "obstacleFloor"},
+  { x: 47, y: 3, type: "obstacleFloor"},
   //quart
-  { x: 57, y: 6 },
-  { x: 57, y: 5 },
-  { x: 57, y: 4 },
-  { x: 57, y: 3 },
-  { x: 58, y: 6 },
-  { x: 58, y: 5 },
-  { x: 58, y: 4 },
-  { x: 58, y: 3 },
+  { x: 57, y: 6, type: "obstacleFloor" },
+  { x: 57, y: 5, type: "obstacleFloor"},
+  { x: 57, y: 4, type: "obstacleFloor"},
+  { x: 57, y: 3, type: "obstacleFloor"},
+  { x: 58, y: 6, type: "obstacleFloor" },
+  { x: 58, y: 5, type: "obstacleFloor"},
+  { x: 58, y: 4, type: "obstacleFloor"},
+  { x: 58, y: 3, type: "obstacleFloor"},
 
-  { x: 134, y: 6 },
-  { x: 135, y: 6 },
-  { x: 136, y: 6 },
-  { x: 137, y: 6 },
-  { x: 135, y: 5 },
-  { x: 136, y: 5 },
-  { x: 137, y: 5 },
-  { x: 136, y: 4 },
-  { x: 137, y: 4 },
-  { x: 137, y: 3 },
+  { x: 134, y: 6, type: "obstacleFloor" },
+  { x: 135, y: 6, type: "obstacleFloor" },
+  { x: 136, y: 6, type: "obstacleFloor" },
+  { x: 137, y: 6, type: "obstacleFloor" },
+  { x: 135, y: 5, type: "obstacleFloor"},
+  { x: 136, y: 5, type: "obstacleFloor"},
+  { x: 137, y: 5, type: "obstacleFloor"},
+  { x: 136, y: 4, type: "obstacleFloor"},
+  { x: 137, y: 4, type: "obstacleFloor"},
+  { x: 137, y: 3, type: "obstacleFloor"},
 
-  { x: 140, y: 6 },
-  { x: 141, y: 6 },
-  { x: 142, y: 6 },
-  { x: 143, y: 6 },
-  { x: 140, y: 5 },
-  { x: 141, y: 5 },
-  { x: 142, y: 5 },
-  { x: 140, y: 4 },
-  { x: 141, y: 4 },
-  { x: 140, y: 3 },
+  { x: 140, y: 6, type: "obstacleFloor" },
+  { x: 141, y: 6, type: "obstacleFloor" },
+  { x: 142, y: 6, type: "obstacleFloor" },
+  { x: 143, y: 6, type: "obstacleFloor" },
+  { x: 140, y: 5, type: "obstacleFloor"},
+  { x: 141, y: 5, type: "obstacleFloor"},
+  { x: 142, y: 5, type: "obstacleFloor"},
+  { x: 140, y: 4, type: "obstacleFloor"},
+  { x: 141, y: 4, type: "obstacleFloor"},
+  { x: 140, y: 3, type: "obstacleFloor"},
 
-  { x: 148, y: 6 },
-  { x: 149, y: 6 },
-  { x: 150, y: 6 },
-  { x: 151, y: 6 },
-  { x: 152, y: 6 },
-  { x: 149, y: 5 },
-  { x: 150, y: 5 },
-  { x: 151, y: 5 },
-  { x: 152, y: 5 },
-  { x: 150, y: 4 },
-  { x: 151, y: 4 },
-  { x: 152, y: 4 },
-  { x: 151, y: 3 },
-  { x: 152, y: 3 },
+  { x: 148, y: 6, type: "obstacleFloor" },
+  { x: 149, y: 6, type: "obstacleFloor" },
+  { x: 150, y: 6, type: "obstacleFloor" },
+  { x: 151, y: 6, type: "obstacleFloor" },
+  { x: 152, y: 6, type: "obstacleFloor" },
+  { x: 149, y: 5, type: "obstacleFloor"},
+  { x: 150, y: 5, type: "obstacleFloor"},
+  { x: 151, y: 5, type: "obstacleFloor"},
+  { x: 152, y: 5, type: "obstacleFloor"},
+  { x: 150, y: 4, type: "obstacleFloor"},
+  { x: 151, y: 4, type: "obstacleFloor"},
+  { x: 152, y: 4, type: "obstacleFloor"},
+  { x: 151, y: 3, type: "obstacleFloor"},
+  { x: 152, y: 3, type: "obstacleFloor"},
 ];
 
 

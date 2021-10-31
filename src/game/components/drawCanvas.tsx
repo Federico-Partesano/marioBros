@@ -1,4 +1,7 @@
-import { imageMap, sprites, BLOCK } from "../resouces";
+import { imageMap, sprites, BLOCK, obstacleFloor, pxForDontShowBlackInBottom } from "../resouces";
+import { Brick, TypeObstacle, ObstacleBrick } from "./interfaces";
+import { imageWall, imageSepcialBrick, imageEmptyBrick, enemyMushRoom, spritesEnemyMushRoom } from "../resouces";
+import { imageAnimationMushRooms } from "../animations/animationMushRooms";
 
 export const drawCanvas = (ctx: any, canvas: any, touchStart: any, interiorCircle: any, animationSpriteMario: any,coordMario: any) => {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -60,6 +63,49 @@ ctx.drawImage(
   BLOCK,
   BLOCK
 );
+                  // ------- MUSHROOMS -----------------//
+enemyMushRoom.forEach((element: any) =>{
+
+  ctx.drawImage(
+    sprites,
+    imageAnimationMushRooms.x,
+    imageAnimationMushRooms.y,
+    16,
+    16,
+    BLOCK * element.x + coordMario.x,
+    BLOCK * element.y + pxForDontShowBlackInBottom - coordMario.y + 102,
+    BLOCK,
+    BLOCK
+  );
+
+
+});
+
+obstacleFloor.forEach((element: ObstacleBrick) => {
+  let image
+  switch(element.type){
+      case "brick":
+      image = imageWall;
+      break;
+        case "specialBrick":
+    image = imageSepcialBrick;
+    break;
+    case "emptyBrick":
+      image = imageEmptyBrick;
+      break;
+      default:
+        image = null;
+        break;
+
+  }
+ image && ctx.drawImage( image,
+    BLOCK * element.x + coordMario.x,
+    BLOCK * element.y + pxForDontShowBlackInBottom - coordMario.y + 102,
+    BLOCK,
+    BLOCK
+  );
+
+});
 
 
 

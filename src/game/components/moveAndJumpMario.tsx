@@ -1,8 +1,9 @@
-import { Player, Jump } from "./interfaces";
+import { Player, Jump, ObstacleBrick,Brick} from "./interfaces";
 import { directionMario } from "../game";
 import { speedUp } from "./checkInputMobile";
-import { directionsMario, obstacleFloor, floor, BLOCK,gravity} from "../resouces";
+import { directionsMario, obstacleFloor,floor, BLOCK,gravity} from "../resouces";
 import { checkCollision } from "./detectionCollisions";
+import { setStartAnimation, animationWallJumpMario } from "../animations/animationWallJumpMario";
 
 
 export let coordMario: Player = { x: 0, y: BLOCK * 6, vel: 0 };
@@ -91,7 +92,12 @@ export const moveMario = () => {
       } else {
         coordMario.y++;
       }
-      if (jump.count > 30) {
+      if (jump.count > 30 || checkCollision(coordMario,obstacleFloor,"up")) {
+        if(checkCollision(coordMario,obstacleFloor,"up")){
+        let wall: any = checkCollision(coordMario,obstacleFloor,"up")!;
+        wall.type !=="emptyBrick" &&  setStartAnimation(true, wall!);
+        if(wall.type === "specialBrick") { wall!.type = "emptyBrick"};
+        }
         jump = { state: false, count: 0 };
       }
     } else {

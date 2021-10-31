@@ -5,6 +5,8 @@ import { HandleCheckJump, HandleStopJump } from "./components/checkInputDesktop"
 import { drawCanvas } from "./components/drawCanvas";
 import { jump, moveMario, checkSpeedMario} from "./components/moveAndJumpMario";
 import { speedUpUp, speedUpDown, HandleTouchStart, HandleTouchMove, HandleTouchEnd } from "./components/checkInputMobile";
+import { animationWallJumpMario } from "./animations/animationWallJumpMario";
+import { gravityMushrooms, moveMushRoom } from "./enemies/mushRooms";
 import {
   obstacleFloor,
   floor,
@@ -12,12 +14,14 @@ speedAnimationTimeInMillies,
   spritesMario,
   directionsMario,
 imageMap,
+enemyMushRoom,
 } from "./resouces";
 import { useEffect } from "react";
 
 import "../css/Game.css";
+import { animationMushRooms } from "./animations/animationMushRooms";
 declare module "*.png";
-let currentTime = 0;
+export let currentTime = 0;
 let lastCalledTime = 0;
 let timeForAnimationMario = 0;
 
@@ -207,10 +211,13 @@ const Canvas = () => {
 
               //    imported method draw Canvas
    drawCanvas(ctx,canvas,touchStart,interiorCircle,animationSpriteMario,coordMario);
-
+   animationMushRooms();
+   moveMushRoom();
+  gravityMushrooms();
     moveMario();
     checkAnimationMario();
     checkSpeedMario();
+    animationWallJumpMario();
   };
   return (
     <canvas

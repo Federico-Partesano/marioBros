@@ -1,9 +1,9 @@
-import { Player, Brick } from "./interfaces";
+import { Player, Brick, ObstacleBrick, Enemy } from "./interfaces";
 import { pxForDontShowBlackInBottom,BLOCK } from "../resouces";
 const intersects = require("intersects");
 
 export function intersect(
-    coordMario: Player,
+    coordMario: Player | Enemy,
     BLOCK: number,
     obj: Brick,
     direction: string,
@@ -59,14 +59,40 @@ export function intersect(
         );
     }
   }
+
+  export function intersectMushroom(
+    coordMushRoom: Player | Enemy,
+    obj:   any,
+
+  ) {
+    return intersects.boxBox(
+      coordMushRoom.x,
+      coordMushRoom.y + 3,
+      BLOCK,
+      BLOCK,
+      obj.x * BLOCK,
+      obj.y * BLOCK + pxForDontShowBlackInBottom - coordMushRoom.y + 102,
+      BLOCK,
+      BLOCK
+    )
+  }
   
   export function checkCollision(
     coordMario: Player,
-    array: Array<Brick>,
+    array: Array<Brick> | Array<ObstacleBrick>,
     direction: string
-  ) {
-    return array.some((element) =>
+  ): Brick | ObstacleBrick | undefined {
+    return array.find((element: Brick | ObstacleBrick) =>
       intersect(coordMario, BLOCK,element, direction)
+    );
+  }
+  export function checkCollisionMushrooms(
+    coordMushroom: Enemy,
+    array: Array<Brick> | Array<ObstacleBrick>,
+    direction: string
+  ): Brick | ObstacleBrick | undefined {
+    return array.find((element: Brick | ObstacleBrick) =>
+      intersect(coordMushroom, BLOCK,element, direction)
     );
   }
   
