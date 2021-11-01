@@ -2,6 +2,10 @@ import { enemyMushRoom, obstacleFloor, setEnemyMushRooms, setEnemyMushRoom, floo
 import { Enemy } from "../components/interfaces";
 import { speedMushRooms } from "../resouces";
 import { checkCollision, checkCollisionMushrooms, intersectMushroom } from "../components/detectionCollisions";
+
+
+
+
 export const moveMushRoom = () => {
 
  
@@ -9,14 +13,17 @@ export const moveMushRoom = () => {
 }
 
 export const gravityMushrooms = () => {
-    console.log(intersectMushroom(enemyMushRoom[0],floor),"--", enemyMushRoom[0]);
+   // console.log(intersectMushroom(enemyMushRoom[0],floor),"--", enemyMushRoom[0]);
     for (let key in enemyMushRoom) {
-        let value = enemyMushRoom[key];
-        if (!checkCollisionMushrooms(enemyMushRoom[key],floor,"down") && !checkCollisionMushrooms(enemyMushRoom[key],obstacleFloor,"down")){
-         
-            setEnemyMushRoom(parseInt(key),{x: enemyMushRoom[key].x, y: enemyMushRoom[key]. y + 0.1})
-        }
+
+            (!checkCollisionMushrooms(enemyMushRoom[key],floor)) && (setEnemyMushRoom(parseInt(key),{x: enemyMushRoom[key].x, y: enemyMushRoom[key]. y + 0.1}))
+
+            }
+            
+     
+       
+   
         // Use `key` and `value`
     }
-} 
+
 

@@ -4,7 +4,7 @@ import imgWall from "../images/skyBrick.png";
 import imgSprites from "../images/sprites.gif";
 import imgEmptyBrick from "../images/emptyBrick.png";
 import specialBrick from "../images/specialBrick.png";
-
+import imgCoins from "../images/coins.png";
 
 export let imageMap = new Image();
 imageMap.src = imgMap;
@@ -14,6 +14,9 @@ export let imageEmptyBrick = new Image();
 imageEmptyBrick.src = imgEmptyBrick;
 export let imageSepcialBrick = new Image();
 imageSepcialBrick.src = specialBrick;
+export let imageCoins = new Image();
+imageCoins.src = imgCoins;
+
 
 
 export const BLOCK = 16;
@@ -42,7 +45,7 @@ export const spritesEnemyMushRoom = [
 ];
 
 export let enemyMushRoom: Array<Enemy> = [
-{x: 15, y: 5}
+{x: 13, y: 3}
 ];
 
 export const setEnemyMushRooms = (value: any) => {

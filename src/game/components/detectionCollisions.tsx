@@ -1,5 +1,5 @@
 import { Player, Brick, ObstacleBrick, Enemy } from "./interfaces";
-import { pxForDontShowBlackInBottom,BLOCK } from "../resouces";
+import { pxForDontShowBlackInBottom,BLOCK, enemyMushRoom } from "../resouces";
 const intersects = require("intersects");
 
 export function intersect(
@@ -9,6 +9,7 @@ export function intersect(
     direction: string,
 
   ) {
+   
     switch (direction) {
       case "left":
         return intersects.boxBox(
@@ -61,17 +62,18 @@ export function intersect(
   }
 
   export function intersectMushroom(
-    coordMushRoom: Player | Enemy,
+    coordMushRoom: Enemy,
     obj:   any,
 
   ) {
+
     return intersects.boxBox(
-      coordMushRoom.x,
-      coordMushRoom.y + 3,
+      coordMushRoom.x * BLOCK,
+      coordMushRoom.y * BLOCK + 3 ,
       BLOCK,
       BLOCK,
       obj.x * BLOCK,
-      obj.y * BLOCK + pxForDontShowBlackInBottom - coordMushRoom.y + 102,
+      obj.y * BLOCK,
       BLOCK,
       BLOCK
     )
@@ -89,10 +91,9 @@ export function intersect(
   export function checkCollisionMushrooms(
     coordMushroom: Enemy,
     array: Array<Brick> | Array<ObstacleBrick>,
-    direction: string
   ): Brick | ObstacleBrick | undefined {
     return array.find((element: Brick | ObstacleBrick) =>
-      intersect(coordMushroom, BLOCK,element, direction)
+      intersectMushroom(coordMushroom, element)
     );
   }
   

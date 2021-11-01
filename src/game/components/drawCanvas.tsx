@@ -1,6 +1,6 @@
 import { imageMap, sprites, BLOCK, obstacleFloor, pxForDontShowBlackInBottom } from "../resouces";
 import { Brick, TypeObstacle, ObstacleBrick } from "./interfaces";
-import { imageWall, imageSepcialBrick, imageEmptyBrick, enemyMushRoom, spritesEnemyMushRoom } from "../resouces";
+import { imageWall, imageSepcialBrick, imageEmptyBrick, enemyMushRoom, spritesEnemyMushRoom, imageCoins } from "../resouces";
 import { imageAnimationMushRooms } from "../animations/animationMushRooms";
 
 export const drawCanvas = (ctx: any, canvas: any, touchStart: any, interiorCircle: any, animationSpriteMario: any,coordMario: any) => {
@@ -36,7 +36,7 @@ ctx.drawImage(imageMap, coordMario.x, -coordMario.y + 30, 3392, 224);
 ctx.save();
 
 ctx.restore();
-// PLAYER MARIOd
+// PLAYER MARIO
 ctx.fillStyle = "rgba(0,0,0,0.5)";
 ctx.fill();
 
@@ -53,9 +53,9 @@ ctx.fill();
 // );
 
 ctx.drawImage(
-  sprites,
-  animationSpriteMario.x,
-  animationSpriteMario.y,
+  imageCoins,
+ 0,
+  2,
   16,
   16,
   BLOCK * 9,
