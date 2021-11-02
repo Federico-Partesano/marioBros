@@ -1,9 +1,9 @@
 
 import { checkCollision } from "./detectionCollisions";
 import { coordMario } from "./moveAndJumpMario";
-import { floor,obstacleFloor } from "../resouces";
+import { audioMusic, floor,obstacleFloor } from "../resouces";
 import { jump,resetJump } from "./moveAndJumpMario";
-
+import { audioJump } from "../resouces";
 
 
 export const HandleCheckJump = () => {
@@ -19,7 +19,9 @@ export const HandleCheckJump = () => {
         "down"
       )
     ) {
+    
       jump.state = true;
+
     }
   };
 

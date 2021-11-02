@@ -1,7 +1,7 @@
-import { enemyMushRoom, obstacleFloor, setEnemyMushRooms, setEnemyMushRoom, floor } from "../resouces";
-import { Enemy } from "../components/interfaces";
+import { enemyMushRoom,  setEnemyMushRooms, setEnemyMushRoom, floor } from "../resouces";
+//import { Enemy } from "../components/interfaces";
 import { speedMushRooms } from "../resouces";
-import { checkCollision, checkCollisionMushrooms, intersectMushroom } from "../components/detectionCollisions";
+import {  checkCollisionMushrooms } from "../components/detectionCollisions";
 
 
 

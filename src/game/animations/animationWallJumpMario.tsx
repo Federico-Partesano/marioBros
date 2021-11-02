@@ -1,10 +1,11 @@
 
-import { obstacleFloor, spritesMario } from "../resouces";
+
 import { currentTime } from "../game";
-import { Brick, ObstacleBrick } from "../components/interfaces";
+
 const speedAnimationTimeInMillies = 15;
 let timeForAnimationMario: number = 0;
-let countForAnimationWall: number = 0;
+
+
 let startAnimation: any = {status: false, wall: {}, count: 0};
 
 export const setStartAnimation = (choice: boolean, wall: any) =>{

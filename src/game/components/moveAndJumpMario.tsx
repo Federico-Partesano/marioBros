@@ -1,11 +1,15 @@
-import { Player, Jump, ObstacleBrick,Brick} from "./interfaces";
+import { Player, Jump} from "./interfaces";
 import { directionMario } from "../game";
 import { speedUp } from "./checkInputMobile";
 import { directionsMario, obstacleFloor,floor, BLOCK,gravity} from "../resouces";
 import { checkCollision } from "./detectionCollisions";
-import { setStartAnimation, animationWallJumpMario } from "../animations/animationWallJumpMario";
+import { setStartAnimation } from "../animations/animationWallJumpMario";
 
 
+let yVal = 0;  
+let velocity = 0; 
+let mass = 10; 
+let accel = mass * 0.1; 
 export let coordMario: Player = { x: 0, y: BLOCK * 6, vel: 0 };
 export let jump: Jump = { state: false, count: 0 };
 export let speedM: number = 0;

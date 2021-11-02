@@ -1,10 +1,12 @@
 import { checkCollision } from "./detectionCollisions";
 import { coordMario } from "./moveAndJumpMario";
-import { obstacleFloor, floor } from "../resouces";
+import { obstacleFloor, floor, startAudioJump } from "../resouces";
 import { jump } from "./moveAndJumpMario";
 import { directionsMario } from "../resouces";
 import { changeDirectionForMobile } from "../game";
 import { resetJump } from "./moveAndJumpMario";
+import { audioJump } from "../resouces";
+
 export let speedUp: boolean = false;
 export const speedUpUp = () => speedUp = true;
 export const speedUpDown = () => speedUp = false;
@@ -40,8 +42,9 @@ export const HandleTouchStart = (e: any, setTouchStart: any,setInteriorCircle: a
               "down"
             )
           ) {
-        
+            console.log("jump");
             jump.state = true;
+           startAudioJump();
           }
         }
         break;

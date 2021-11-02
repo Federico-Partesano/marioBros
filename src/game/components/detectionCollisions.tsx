@@ -1,5 +1,5 @@
 import { Player, Brick, ObstacleBrick, Enemy } from "./interfaces";
-import { pxForDontShowBlackInBottom,BLOCK, enemyMushRoom } from "../resouces";
+import { pxForDontShowBlackInBottom,BLOCK } from "../resouces";
 const intersects = require("intersects");
 
 export function intersect(

@@ -15,8 +15,10 @@ speedAnimationTimeInMillies,
   directionsMario,
 imageMap,
 enemyMushRoom,
+startAudio,
+audioMusic,
 } from "./resouces";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 import "../css/Game.css";
 import { animationMushRooms } from "./animations/animationMushRooms";
@@ -115,6 +117,14 @@ const Canvas = () => {
     },
     [tick]
   );
+  useLayoutEffect(() => {
+    
+
+     startAudio();
+
+   
+  
+  }, [audioMusic])
 
   useEffect(() => {
     window.addEventListener("keydown", checkKeyDown, true);

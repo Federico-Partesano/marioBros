@@ -1,6 +1,6 @@
 import { imageMap, sprites, BLOCK, obstacleFloor, pxForDontShowBlackInBottom } from "../resouces";
-import { Brick, TypeObstacle, ObstacleBrick } from "./interfaces";
-import { imageWall, imageSepcialBrick, imageEmptyBrick, enemyMushRoom, spritesEnemyMushRoom, imageCoins } from "../resouces";
+import { ObstacleBrick } from "./interfaces";
+import { imageWall, imageSepcialBrick, imageEmptyBrick, enemyMushRoom } from "../resouces";
 import { imageAnimationMushRooms } from "../animations/animationMushRooms";
 
 export const drawCanvas = (ctx: any, canvas: any, touchStart: any, interiorCircle: any, animationSpriteMario: any,coordMario: any) => {
@@ -53,9 +53,9 @@ ctx.fill();
 // );
 
 ctx.drawImage(
-  imageCoins,
- 0,
-  2,
+  sprites,
+ animationSpriteMario.x,
+  animationSpriteMario.y,
   16,
   16,
   BLOCK * 9,

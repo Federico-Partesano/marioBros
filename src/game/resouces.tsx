@@ -1,10 +1,13 @@
-import { Brick, TypeObstacle, ObstacleBrick, Enemy } from "./components/interfaces";
+import { Brick, ObstacleBrick, Enemy } from "./components/interfaces";
 import imgMap from "../images/map2.png";
 import imgWall from "../images/skyBrick.png";
 import imgSprites from "../images/sprites.gif";
 import imgEmptyBrick from "../images/emptyBrick.png";
 import specialBrick from "../images/specialBrick.png";
 import imgCoins from "../images/coins.png";
+
+import  musicAudio from './../audio/music.mp3';
+import  musicJump from './../audio/music.mp3';
 
 export let imageMap = new Image();
 imageMap.src = imgMap;
@@ -17,6 +20,22 @@ imageSepcialBrick.src = specialBrick;
 export let imageCoins = new Image();
 imageCoins.src = imgCoins;
 
+export let audioMusic = new Audio(musicAudio);
+export let audioJump = new Audio(musicJump);
+
+export const startAudioJump = () => {
+  audioJump.play();
+}
+
+export const startAudio = () => {
+  
+audioMusic.muted=false;
+audioMusic.autoplay=true;
+audioMusic.loop=true;
+ audioMusic.pause();
+
+
+}
 
 
 export const BLOCK = 16;
@@ -45,7 +64,7 @@ export const spritesEnemyMushRoom = [
 ];
 
 export let enemyMushRoom: Array<Enemy> = [
-{x: 13, y: 3}
+{x: 19, y: 5}
 ];
 
 export const setEnemyMushRooms = (value: any) => {
